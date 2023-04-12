@@ -1,5 +1,11 @@
+# IDe
+.idea
+
 # Compiled class file
 *.class
+
+# Compiled output
+out/
 
 # Log file
 *.log
