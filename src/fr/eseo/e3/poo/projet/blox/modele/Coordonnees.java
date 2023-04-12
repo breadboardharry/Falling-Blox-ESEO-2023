@@ -1,5 +1,7 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+import java.util.Objects;
+
 public class Coordonnees {
     private int abscisse;
     private int ordonnee;
@@ -35,16 +37,16 @@ public class Coordonnees {
         return "(" + this.abscisse + ", " + this.ordonnee + ")";
     }
 
+    @Override
     public boolean equals(Object o) {
-        if (o == this) return true;
-        if (!(o instanceof Coordonnees)) return false;
-
-        Coordonnees c = (Coordonnees)o;
-        return c.abscisse == this.abscisse && c.ordonnee == this.ordonnee;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Coordonnees c = (Coordonnees) o;
+        return this.abscisse == c.abscisse && this.ordonnee == c.ordonnee;
     }
 
     @Override
     public int hashCode() {
-        return this.abscisse * 10000 + this.ordonnee;
+        return Objects.hash(this.abscisse, this.ordonnee);
     }
 }
