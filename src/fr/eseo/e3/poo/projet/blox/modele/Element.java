@@ -47,8 +47,12 @@ public class Element {
 
     @Override
     public boolean equals(Object o) {
+        // Check if the object is this instance
         if (this == o) return true;
+        // Check if the object is an Element
         if (o == null || getClass() != o.getClass()) return false;
+
+        // Check if the values are the same
         Element element = (Element) o;
         return this.couleur == element.couleur && Objects.equals(this.coordonnees, element.coordonnees);
     }

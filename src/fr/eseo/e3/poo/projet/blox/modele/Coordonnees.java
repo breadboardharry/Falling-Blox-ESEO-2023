@@ -39,8 +39,12 @@ public class Coordonnees {
 
     @Override
     public boolean equals(Object o) {
+        // Check if the object is this instance
         if (this == o) return true;
+        // Check if the object is Coordonnees
         if (o == null || getClass() != o.getClass()) return false;
+
+        // Check if the values are the same
         Coordonnees c = (Coordonnees) o;
         return this.abscisse == c.abscisse && this.ordonnee == c.ordonnee;
     }
