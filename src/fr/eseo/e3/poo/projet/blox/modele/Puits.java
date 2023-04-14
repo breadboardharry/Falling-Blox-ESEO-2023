@@ -30,7 +30,7 @@ public class Puits {
 
     public void setLargeur(int largeur) {
         // Check if the given dimensions are valid
-        if(largeur < 5 || largeur > 15)
+        if (largeur < 5 || largeur > 15)
             throw new IllegalArgumentException("Largeur invalide : " + largeur + " (5 - 15)");
 
         this.largeur = largeur;
@@ -42,7 +42,7 @@ public class Puits {
 
     public void setProfondeur(int profondeur) {
         // Check if the given dimensions are valid
-        if(profondeur < 15 || profondeur > 25)
+        if (profondeur < 15 || profondeur > 25)
             throw new IllegalArgumentException("Profondeur invalide : " + profondeur + " (15 - 25)");
 
         this.profondeur = profondeur;
@@ -99,7 +99,10 @@ public class Puits {
 
         // Check if the values are the same
         Puits puits = (Puits) o;
-        return largeur == puits.largeur && profondeur == puits.profondeur && Objects.equals(pieceActuelle, puits.pieceActuelle) && Objects.equals(pieceSuivante, puits.pieceSuivante);
+        return largeur == puits.largeur &&
+                profondeur == puits.profondeur &&
+                Objects.equals(pieceActuelle, puits.pieceActuelle) &&
+                Objects.equals(pieceSuivante, puits.pieceSuivante);
     }
 
     @Override
