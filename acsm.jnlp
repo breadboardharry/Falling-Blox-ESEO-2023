@@ -1,0 +1,36 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <jnlp spec="1.6+" codebase="https://tools-dis.eseo.fr/asscen/launcher/" href="acsm.jnlp">
+    <information>
+        <title>E3 POO Assignment Centre Student Module (java 11 + Java FX)</title>
+        <vendor>Groupe ESEO (Richard Woodward)</vendor>
+        <description>Validate your progress as you work through the OOP Project</description>
+    </information>
+    <security>
+        <all-permissions/>
+    </security>
+    <resources>
+        <j2se version="1.11+"/>
+        <jar href="acsm_2023.jar"/>
+        <jar href="lib/acCore_Annotations.jar"/>
+        <jar href="lib/acCore_Model_Assignment.jar"/>
+        <jar href="lib/acCore_Model_Users.jar"/>
+        <jar href="lib/acCore_Utilities.jar"/>
+        <jar href="lib/asm-9.2.jar"/>
+        <jar href="lib/asm-commons-9.2.jar"/>
+        <jar href="lib/asm-tree-9.2.jar"/>
+        <jar href="lib/checkstyle-9.0-all.jar"/>
+        <jar href="lib/commons-io-2.11.0.jar"/>
+        <jar href="lib/controlsfx-11.1.0.jar"/>
+        <jar href="lib/chartfx.jar"/>
+        <jar href="lib/json-simple-4.0.0.jar"/>
+        <jar href="lib/log4j-api-2.14.1.jar"/>
+        <jar href="lib/log4j-core-2.14.1.jar"/>
+        <jar href="lib/org.jacoco.core-0.8.7.jar"/>
+        <jar href="lib/org.jacoco.report-0.8.7.jar"/>
+        
+        
+    </resources>
+    <application-desc main-class="fr.eseo.dis.asscen.students.app.AssignmentCentreStudentModule">
+        <argument>https://tools-dis.eseo.fr/asscen</argument>
+    </application-desc>
+</jnlp>
