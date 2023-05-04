@@ -63,6 +63,13 @@ public class ElementTest {
     }
 
     @Test
+    void testDeplacerDe() {
+        Element e = new Element(new Coordonnees(1, 2), Couleur.JAUNE);
+        e.deplacerDe(1, -2);
+        assertEquals(new Coordonnees(2, 0), e.getCoordonnees(), "Deplacer de");
+    }
+
+    @Test
     void testToString() {
         Element e = new Element(new Coordonnees(1, 2), Couleur.BLEU);
         assertEquals("(1, 2) - BLEU", e.toString(), "ToString");

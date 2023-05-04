@@ -23,6 +23,11 @@ public class OPiece extends Piece {
     }
 
     @Override
+    public void tourner(boolean sensHoraire) {
+        // Nothing to do
+    }
+
+    @Override
     public String toString() {
         StringBuilder str = new StringBuilder("OPiece :\n");
         // Display elements
