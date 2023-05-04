@@ -46,6 +46,34 @@ public abstract class Piece {
             element.deplacerDe(deltaX, deltaY);
     }
 
+    public void tourner(boolean sensHoraire) {
+        // Get the pivot
+        Element pivot = this.elements.get(0);
+        int pivotX = pivot.getCoordonnees().getAbscisse();
+        int pivotY = pivot.getCoordonnees().getOrdonnee();
+
+        // Calculate sin and cos based on rotation direction
+        int sign = sensHoraire ? 1 : -1;
+        double cos = Math.cos(sign * Math.PI / 2);
+        double sin = Math.sin(sign * Math.PI / 2);
+
+
+        // Iterate over all elements and rotate them around the pivot
+        for (Element element : elements) {
+            // Translate element coordinates to origin
+            int x = element.getCoordonnees().getAbscisse() - pivotX;
+            int y = element.getCoordonnees().getOrdonnee() - pivotY;
+
+            // Apply rotation transformation
+            int rotatedX = (int) Math.round(x * cos - y * sin);
+            int rotatedY = (int) Math.round(x * sin + y * cos);
+
+            // Translate back to original coordinates and update element
+            element.setCoordonnees(new Coordonnees(rotatedX + pivotX, rotatedY + pivotY));
+        }
+
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("");
