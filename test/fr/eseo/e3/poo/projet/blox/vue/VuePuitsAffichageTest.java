@@ -68,7 +68,7 @@ public class VuePuitsAffichageTest {
         Puits puits = new Puits();
         VuePuits vuePuits = new VuePuits(puits);
 
-        // Generate random piece
+        // Generate pieces
         UsineDePiece.setMode(UsineDePiece.CYCLIC);
         Piece piece1 = UsineDePiece.genererPiece();
         Piece piece2 = UsineDePiece.genererPiece();

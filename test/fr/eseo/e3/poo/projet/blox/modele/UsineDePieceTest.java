@@ -1,19 +1,27 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+import fr.eseo.e3.poo.projet.blox.modele.pieces.IPiece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.OPiece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UsineDePieceTest {
 
     @Test
     void testMode() {
+        UsineDePiece.setMode(UsineDePiece.ALEATOIRE_COMPLET);
+        assertEquals(UsineDePiece.ALEATOIRE_COMPLET, UsineDePiece.getMode(), "Getter et setter mode ALEATOIRE_COMPLET");
         UsineDePiece.setMode(UsineDePiece.ALEATOIRE_PIECE);
-        assertEquals(UsineDePiece.ALEATOIRE_PIECE, UsineDePiece.getMode(), "Vérifier getter et setter mode");
+        assertEquals(UsineDePiece.ALEATOIRE_PIECE, UsineDePiece.getMode(), "Getter et setter mode ALEATOIRE_PIECE");
+        UsineDePiece.setMode(UsineDePiece.CYCLIC);
+        assertEquals(UsineDePiece.CYCLIC, UsineDePiece.getMode(), "Getter et setter mode CYCLIC");
     }
 
     @Test
@@ -49,5 +57,34 @@ public class UsineDePieceTest {
     void testGetPiecesArrayWithColor() {
         List<Piece> pieces = UsineDePiece.getPiecesArray(Couleur.CYAN);
         assertEquals(2, pieces.size(), "Vérifier taille pièces avec couleur");
+    }
+
+    // Create an array of pieces with a defined size
+    private ArrayList<Piece> pieceArray(int nb) {
+        ArrayList<Piece> pieces = new ArrayList<>();
+        for (int i = 0; i < nb; i++) {
+            pieces.add(UsineDePiece.genererPiece());
+        }
+        return pieces;
+    }
+
+    private boolean inInterval(int value, int min, int max) {
+        return value >= min && value <= max;
+    }
+
+    @Test
+    void testGenererPieceAC() {
+        UsineDePiece.setMode(UsineDePiece.ALEATOIRE_COMPLET);
+        final ArrayList<Piece> pieces = pieceArray(10000);
+
+        int nbIPiece = 0, nbOPiece = 0;
+        for (Object piece : pieces) {
+            if (piece instanceof IPiece) nbIPiece++;
+            else if (piece instanceof OPiece) nbOPiece++;
+        }
+
+        // Check estimation of number of pieces
+        assertTrue(inInterval(nbIPiece, 4800, 5200), "Estimation nombre de IPiece [4800 - 5200] @ 10000");
+        assertTrue(inInterval(nbOPiece, 4800, 5200), "Estimation nombre de OPiece [4800 - 5200] @ 10000");
     }
 }
