@@ -36,6 +36,16 @@ public abstract class Piece {
         this.puits = puits;
     }
 
+    public void deplacerDe(int deltaX, int deltaY) {
+        // Check inputs
+        if ((deltaX > 1 || deltaX < -1) || (deltaY > 1 || deltaY < 0))
+            throw new IllegalArgumentException("Delta X must be between -1 and 1 and Delta Y must be between 0 and 1");
+
+        // Move each element
+        for (Element element : this.elements)
+            element.deplacerDe(deltaX, deltaY);
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("");

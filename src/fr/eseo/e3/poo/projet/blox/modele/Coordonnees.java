@@ -32,6 +32,11 @@ public class Coordonnees {
         this.ordonnee = ordonnee;
     }
 
+    public void deplacerDe(int deltaX, int deltaY) {
+        this.abscisse += deltaX;
+        this.ordonnee += deltaY;
+    }
+
     @Override
     public String toString() {
         return "(" + this.abscisse + ", " + this.ordonnee + ")";
