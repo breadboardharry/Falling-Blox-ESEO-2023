@@ -54,6 +54,26 @@ public class IPieceTest {
     }
 
     @Test
+    void testTournerHoraire() {
+        IPiece piece = new IPiece(new Coordonnees(2, 2), Couleur.BLEU);
+        piece.tourner(true);
+        assertEquals(new Element(2, 2, Couleur.BLEU), piece.getElements().get(0), "Vérifier élément 1");
+        assertEquals(new Element(4, 2, Couleur.BLEU), piece.getElements().get(1), "Vérifier élément 2");
+        assertEquals(new Element(3, 2, Couleur.BLEU), piece.getElements().get(2), "Vérifier élément 3");
+        assertEquals(new Element(1, 2, Couleur.BLEU), piece.getElements().get(3), "Vérifier élément 4");
+    }
+
+    @Test
+    void testTournerAntiHoraire() {
+        IPiece piece = new IPiece(new Coordonnees(3, 3), Couleur.BLEU);
+        piece.tourner(false);
+        assertEquals(new Element(3, 3, Couleur.BLEU), piece.getElements().get(0), "Vérifier élément 1");
+        assertEquals(new Element(1, 3, Couleur.BLEU), piece.getElements().get(1), "Vérifier élément 2");
+        assertEquals(new Element(2, 3, Couleur.BLEU), piece.getElements().get(2), "Vérifier élément 3");
+        assertEquals(new Element(4, 3, Couleur.BLEU), piece.getElements().get(3), "Vérifier élément 4");
+    }
+
+    @Test
     void testToString() {
         IPiece piece = new IPiece(new Coordonnees(0, 0), Couleur.BLEU);
         assertEquals("IPiece :\n" +
