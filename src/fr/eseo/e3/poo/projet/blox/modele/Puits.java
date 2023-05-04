@@ -2,18 +2,24 @@ package fr.eseo.e3.poo.projet.blox.modele;
 
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.Objects;
 
 public class Puits {
 
     public static final int LARGEUR_PAR_DEFAUT = 10; // [5 - 15]
     public static final int PROFONDEUR_PAR_DEFAUT = 20; // [15 - 25]
+    public static final String MODIFICATION_PIECE_ACTUELLE = "PieceActuelleChanged";
+    public static final String MODIFICATION_PIECE_SUIVANTE = "PieceSuivanteChanged";
 
     private int largeur;
     private int profondeur;
 
     private Piece pieceActuelle;
     private Piece pieceSuivante;
+
+    private PropertyChangeSupport pcs;
 
     public Puits() {
         this(LARGEUR_PAR_DEFAUT, PROFONDEUR_PAR_DEFAUT);
@@ -22,6 +28,7 @@ public class Puits {
     public Puits(int largeur, int profondeur) {
         this.setLargeur(largeur);
         this.setProfondeur(profondeur);
+        this.pcs = new PropertyChangeSupport(this);
     }
 
     public int getLargeur() {
@@ -30,7 +37,7 @@ public class Puits {
 
     public void setLargeur(int largeur) {
         // Check if the given dimensions are valid
-        if(largeur < 5 || largeur > 15)
+        if (largeur < 5 || largeur > 15)
             throw new IllegalArgumentException("Largeur invalide : " + largeur + " (5 - 15)");
 
         this.largeur = largeur;
@@ -42,7 +49,7 @@ public class Puits {
 
     public void setProfondeur(int profondeur) {
         // Check if the given dimensions are valid
-        if(profondeur < 15 || profondeur > 25)
+        if (profondeur < 15 || profondeur > 25)
             throw new IllegalArgumentException("Profondeur invalide : " + profondeur + " (15 - 25)");
 
         this.profondeur = profondeur;
@@ -58,14 +65,18 @@ public class Puits {
 
     public void setPieceSuivante(Piece piece) {
         // Check if there is a current piece
-        if (this.getPieceSuivante() != null) {
+        if (this.pieceSuivante != null) {
             // If there is, set the next piece as the current one and move it
+            Piece prevPiece = this.pieceActuelle;
             this.pieceActuelle = this.pieceSuivante;
             this.pieceActuelle.setPosition(this.getLargeur() / 2, -4);
+            pcs.firePropertyChange(MODIFICATION_PIECE_ACTUELLE, prevPiece, this.pieceActuelle);
         }
 
-        // Set the next piece as the given one
+        // Set the next piece as the given one and inform the listeners
+        Piece prevPiece = this.pieceSuivante;
         this.pieceSuivante = piece;
+        pcs.firePropertyChange(MODIFICATION_PIECE_SUIVANTE, prevPiece, this.pieceSuivante);
     }
 
     @Override
@@ -90,6 +101,14 @@ public class Puits {
         return str.toString();
     }
 
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        this.pcs.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        this.pcs.removePropertyChangeListener(listener);
+    }
+
     @Override
     public boolean equals(Object o) {
         // Check if the object is this instance
@@ -99,7 +118,10 @@ public class Puits {
 
         // Check if the values are the same
         Puits puits = (Puits) o;
-        return largeur == puits.largeur && profondeur == puits.profondeur && Objects.equals(pieceActuelle, puits.pieceActuelle) && Objects.equals(pieceSuivante, puits.pieceSuivante);
+        return largeur == puits.largeur &&
+                profondeur == puits.profondeur &&
+                Objects.equals(pieceActuelle, puits.pieceActuelle) &&
+                Objects.equals(pieceSuivante, puits.pieceSuivante);
     }
 
     @Override

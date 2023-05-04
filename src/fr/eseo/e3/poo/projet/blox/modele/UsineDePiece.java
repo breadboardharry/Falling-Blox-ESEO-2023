@@ -14,7 +14,7 @@ public class UsineDePiece {
     public static final int ALEATOIRE_PIECE = 2;
     public static final int CYCLIC = 3;
     private static int mode = ALEATOIRE_PIECE;
-    private static int cyclecIndex;
+    private static int cycleIndex;
 
     private UsineDePiece() {
     }
@@ -23,7 +23,7 @@ public class UsineDePiece {
         UsineDePiece.mode = mode;
         // Reset the index if the mode is cyclic
         if (mode == CYCLIC)
-            UsineDePiece.cyclecIndex = 0;
+            UsineDePiece.cycleIndex = 0;
     }
 
     public static int getMode() {
@@ -46,8 +46,8 @@ public class UsineDePiece {
 
             case CYCLIC:
                 // Select the piece at the current index and increment the index
-                piece = UsineDePiece.getPiecesArray().get(UsineDePiece.cyclecIndex);
-                UsineDePiece.cyclecIndex = (UsineDePiece.cyclecIndex + 1) % UsineDePiece.getPiecesArray().size();
+                piece = UsineDePiece.getPiecesArray().get(UsineDePiece.cycleIndex);
+                UsineDePiece.cycleIndex = (UsineDePiece.cycleIndex + 1) % UsineDePiece.getPiecesArray().size();
                 break;
 
             // Invalid mode
