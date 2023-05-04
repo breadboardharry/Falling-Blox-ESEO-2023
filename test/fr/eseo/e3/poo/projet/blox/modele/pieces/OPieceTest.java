@@ -20,9 +20,9 @@ public class OPieceTest {
     void testGetElements() {
         OPiece piece = new OPiece(new Coordonnees(0, 0), Couleur.BLEU);
         assertEquals(new Element(0, 0, Couleur.BLEU), piece.getElements().get(0), "Vérifier élément 1");
-        assertEquals(new Element(1, 0, Couleur.BLEU), piece.getElements().get(1), "Vérifier élément 1");
-        assertEquals(new Element(0, -1, Couleur.BLEU), piece.getElements().get(2), "Vérifier élément 1");
-        assertEquals(new Element(1, -1, Couleur.BLEU), piece.getElements().get(3), "Vérifier élément 1");
+        assertEquals(new Element(1, 0, Couleur.BLEU), piece.getElements().get(1), "Vérifier élément 2");
+        assertEquals(new Element(0, -1, Couleur.BLEU), piece.getElements().get(2), "Vérifier élément 3");
+        assertEquals(new Element(1, -1, Couleur.BLEU), piece.getElements().get(3), "Vérifier élément 4");
     }
 
     @Test
@@ -30,9 +30,9 @@ public class OPieceTest {
         OPiece piece = new OPiece(new Coordonnees(0, 0), Couleur.BLEU);
         piece.setPosition(1, 1);
         assertEquals(new Element(1, 1, Couleur.BLEU), piece.getElements().get(0), "Vérifier élément 1");
-        assertEquals(new Element(2, 1, Couleur.BLEU), piece.getElements().get(1), "Vérifier élément 1");
-        assertEquals(new Element(1, 0, Couleur.BLEU), piece.getElements().get(2), "Vérifier élément 1");
-        assertEquals(new Element(2, 0, Couleur.BLEU), piece.getElements().get(3), "Vérifier élément 1");
+        assertEquals(new Element(2, 1, Couleur.BLEU), piece.getElements().get(1), "Vérifier élément 2");
+        assertEquals(new Element(1, 0, Couleur.BLEU), piece.getElements().get(2), "Vérifier élément 3");
+        assertEquals(new Element(2, 0, Couleur.BLEU), piece.getElements().get(3), "Vérifier élément 4");
     }
 
     @Test
@@ -41,6 +41,16 @@ public class OPieceTest {
         Puits puits = new Puits();
         piece.setPuits(puits);
         assertEquals(puits, piece.getPuits(), "Vérifier puits");
+    }
+
+    @Test
+    void testDeplacerDe() {
+        OPiece piece = new OPiece(new Coordonnees(0, 0), Couleur.BLEU);
+        piece.deplacerDe(1, 1);
+        assertEquals(new Element(1, 1, Couleur.BLEU), piece.getElements().get(0), "Vérifier élément 1");
+        assertEquals(new Element(2, 1, Couleur.BLEU), piece.getElements().get(1), "Vérifier élément 2");
+        assertEquals(new Element(1, 0, Couleur.BLEU), piece.getElements().get(2), "Vérifier élément 3");
+        assertEquals(new Element(2, 0, Couleur.BLEU), piece.getElements().get(3), "Vérifier élément 4");
     }
 
     @Test
