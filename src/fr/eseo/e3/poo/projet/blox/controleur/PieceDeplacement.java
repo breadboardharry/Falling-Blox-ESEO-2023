@@ -3,10 +3,12 @@ package fr.eseo.e3.poo.projet.blox.controleur;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
 
-public class PieceDeplacement implements MouseMotionListener {
+public class PieceDeplacement extends MouseAdapter {
 
     private VuePuits vuePuits;
     private Puits puits;
@@ -21,6 +23,18 @@ public class PieceDeplacement implements MouseMotionListener {
     private boolean firstTime = true;
 
 
+    public void mouseEntered(MouseEvent event) {
+        this.firstTime = true;
+    }
+
+    public void mouseWheelMoved(MouseWheelEvent event) {
+        if (this.puits.getPieceActuelle() != null) {
+            if (event.getWheelRotation() > 0) {
+                this.puits.getPieceActuelle().deplacerDe(0, 1);
+            }
+        }
+    }
+
     public void mouseMoved(MouseEvent event) {
         if (this.puits.getPieceActuelle() != null) {
 
@@ -31,13 +45,11 @@ public class PieceDeplacement implements MouseMotionListener {
                 this.lastColunm = currentColunm;
             }
             else if (currentColunm != this.lastColunm) {
-                this.puits.getPieceActuelle().deplacerDe(currentColunm - this.lastColunm, 0);
+                int dx = currentColunm - this.lastColunm;
+                dx = dx > 0 ? 1 : -1;
+                this.puits.getPieceActuelle().deplacerDe(dx, 0);
                 this.lastColunm = currentColunm;
             }
         }
-    }
-
-    public void mouseDragged(MouseEvent event) {
-
     }
 }

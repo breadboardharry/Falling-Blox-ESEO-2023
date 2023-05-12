@@ -23,7 +23,10 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         this.setPuits(puits);
         this.setTaille(taille);
         this.pieceDeplacement = new PieceDeplacement(this);
+
+        this.addMouseListener(this.pieceDeplacement);
         this.addMouseMotionListener(this.pieceDeplacement);
+        this.addMouseWheelListener(this.pieceDeplacement);
     }
 
     public VuePuits(Puits puits) {
