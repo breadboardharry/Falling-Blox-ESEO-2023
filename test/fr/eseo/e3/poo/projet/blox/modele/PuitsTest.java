@@ -4,17 +4,52 @@ import fr.eseo.e3.poo.projet.blox.modele.pieces.IPiece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.OPiece;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PuitsTest {
 
     @Test
-    void testConstructeur() {
+    void testConstructeurVide() {
         // Check default constructor
         Puits puits = new Puits();
         assertEquals(Puits.LARGEUR_PAR_DEFAUT, puits.getLargeur(), "Vérifier largeur par défaut");
         assertEquals(Puits.PROFONDEUR_PAR_DEFAUT, puits.getProfondeur(), "Vérifier largeur par défaut");
+    }
+
+    @Test
+    void testConstructeurLargeurProfondeur() {
+        // Check default constructor
+        Puits puits = new Puits(10, 15);
+        assertEquals(10, puits.getLargeur(), "Vérifier largeur");
+        assertEquals(15, puits.getProfondeur(), "Vérifier largeur");
+    }
+
+    @Test
+    void testConstructeurTas() {
+        // Check default constructor
+        Puits puits = new Puits(10, 15, 0, 0);
+        assertEquals(10, puits.getLargeur(), "Vérifier largeur");
+        assertEquals(15, puits.getProfondeur(), "Vérifier largeur");
+        assertNotNull(puits.getTas(), "Vérifier tas");
+    }
+
+    @Test
+    void testGetTas() {
+        Puits puits = new Puits(10, 15, 40, 5);
+        assertEquals(40, getNbElements(puits.getTas()), "Vérifier tas");
+    }
+
+    private int getNbElements(Tas tas) {
+        Element[][] elements = tas.getElements();
+        int nbElements = 0;
+
+        // Get the total number of instanced elements in the two-dimensional array
+        for (int i = 0; i < elements.length; i++) {
+            for (int j = 0; j < elements[i].length; j++) {
+                if (elements[i][j] != null) nbElements++;
+            }
+        }
+        return nbElements;
     }
 
     @Test
