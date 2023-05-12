@@ -71,7 +71,6 @@ public abstract class Piece {
             // Translate back to original coordinates and update element
             element.setCoordonnees(new Coordonnees(rotatedX + pivotX, rotatedY + pivotY));
         }
-
     }
 
     @Override

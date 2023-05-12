@@ -1,26 +1,36 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
+import fr.eseo.e3.poo.projet.blox.controleur.PieceDeplacement;
+import fr.eseo.e3.poo.projet.blox.controleur.PieceRotation;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
 import javax.swing.JPanel;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Dimension;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class VuePuits extends JPanel implements PropertyChangeListener {
 
-    public static final int TAILLE_PAR_DEFAUT = 20;
+    public static final int TAILLE_PAR_DEFAUT = 15;
     private Puits puits;
     private int taille;
     private VuePiece vuePiece;
+
+    private PieceDeplacement pieceDeplacement;
+    private PieceRotation pieceRotation;
 
     public VuePuits(Puits puits, int taille) {
         super();
         this.setPuits(puits);
         this.setTaille(taille);
+        this.pieceDeplacement = new PieceDeplacement(this);
+        this.pieceRotation = new PieceRotation(this);
+
+        this.addMouseListener(this.pieceDeplacement);
+        this.addMouseListener(this.pieceRotation);
+        this.addMouseMotionListener(this.pieceDeplacement);
+        this.addMouseWheelListener(this.pieceDeplacement);
     }
 
     public VuePuits(Puits puits) {
@@ -75,6 +85,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         // Display the piece
         if (this.vuePiece != null) this.vuePiece.afficherPiece(g2D);
 
+        repaint();
         g2D.dispose();
     }
 

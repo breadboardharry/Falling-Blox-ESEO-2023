@@ -26,7 +26,7 @@ public class VuePuitsAffichageTest {
     }
 
     private void testConstructeurPuits() {
-        // Instantiate puits
+        // Create puits
         Puits puits = new Puits();
         VuePuits vuePuits = new VuePuits(puits);
 
@@ -45,7 +45,7 @@ public class VuePuitsAffichageTest {
     }
 
     private void testConstructeurPuitsTaille() {
-        // Instantiate puits
+        // Create puits
         Puits puits = new Puits();
         VuePuits vuePuits = new VuePuits(puits, 25);
 
@@ -64,7 +64,7 @@ public class VuePuitsAffichageTest {
     }
 
     private void testAffichagePiece() {
-        // Instantiate puits
+        // Create puits
         Puits puits = new Puits();
         VuePuits vuePuits = new VuePuits(puits);
 
