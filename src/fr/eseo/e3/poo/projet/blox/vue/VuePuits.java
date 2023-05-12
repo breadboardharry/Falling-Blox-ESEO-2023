@@ -11,7 +11,7 @@ import java.beans.PropertyChangeListener;
 
 public class VuePuits extends JPanel implements PropertyChangeListener {
 
-    public static final int TAILLE_PAR_DEFAUT = 20;
+    public static final int TAILLE_PAR_DEFAUT = 15;
     private Puits puits;
     private int taille;
     private VuePiece vuePiece;
