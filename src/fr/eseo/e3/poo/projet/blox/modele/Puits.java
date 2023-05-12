@@ -18,6 +18,8 @@ public class Puits {
 
     private Piece pieceActuelle;
     private Piece pieceSuivante;
+    private Tas tas;
+
 
     private PropertyChangeSupport pcs;
 
@@ -26,9 +28,14 @@ public class Puits {
     }
 
     public Puits(int largeur, int profondeur) {
+        this(largeur, profondeur, 0, 0);
+    }
+
+    public Puits(int largeur, int profondeur, int nbElements, int nbLignes) {
         this.setLargeur(largeur);
         this.setProfondeur(profondeur);
         this.pcs = new PropertyChangeSupport(this);
+        this.tas = new Tas(this, nbElements, nbLignes);
     }
 
     public int getLargeur() {
@@ -77,6 +84,10 @@ public class Puits {
         Piece prevPiece = this.pieceSuivante;
         this.pieceSuivante = piece;
         pcs.firePropertyChange(MODIFICATION_PIECE_SUIVANTE, prevPiece, this.pieceSuivante);
+    }
+
+    public Tas getTas() {
+        return this.tas;
     }
 
     @Override
