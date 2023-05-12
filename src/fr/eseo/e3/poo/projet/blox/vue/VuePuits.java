@@ -1,6 +1,7 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
 import fr.eseo.e3.poo.projet.blox.controleur.PieceDeplacement;
+import fr.eseo.e3.poo.projet.blox.controleur.PieceRotation;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
@@ -17,14 +18,17 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     private VuePiece vuePiece;
 
     private PieceDeplacement pieceDeplacement;
+    private PieceRotation pieceRotation;
 
     public VuePuits(Puits puits, int taille) {
         super();
         this.setPuits(puits);
         this.setTaille(taille);
         this.pieceDeplacement = new PieceDeplacement(this);
+        this.pieceRotation = new PieceRotation(this);
 
         this.addMouseListener(this.pieceDeplacement);
+        this.addMouseListener(this.pieceRotation);
         this.addMouseMotionListener(this.pieceDeplacement);
         this.addMouseWheelListener(this.pieceDeplacement);
     }
