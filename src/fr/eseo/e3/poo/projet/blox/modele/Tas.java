@@ -1,5 +1,8 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
+
+import java.util.List;
 import java.util.Random;
 
 public class Tas {
@@ -19,6 +22,17 @@ public class Tas {
 
     public Tas(Puits puits) {
         this(puits, 0, 0);
+    }
+
+    public boolean collision(List<Element> elements) {
+        for (Element[] elems : this.elements) {
+            for (Element elem : elems) {
+                for (Element element : elements) {
+                    if (elem != null && elem.collision(element)) return true;
+                }
+            }
+        }
+        return false;
     }
 
     public Puits getPuits() {

@@ -44,6 +44,10 @@ public class Element {
         this.coordonnees.deplacerDe(deltaX, deltaY);
     }
 
+    public boolean collision(Element element) {
+        return this.coordonnees.equals(element.getCoordonnees());
+    }
+
     @Override
     public String toString() {
         return this.coordonnees.toString() + " - " + this.couleur.toString();

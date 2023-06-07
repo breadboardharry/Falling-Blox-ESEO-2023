@@ -1,9 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.modele.pieces;
 
-import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
-import fr.eseo.e3.poo.projet.blox.modele.Couleur;
-import fr.eseo.e3.poo.projet.blox.modele.Element;
-import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -44,7 +41,7 @@ public class IPieceTest {
     }
 
     @Test
-    void testDeplacerDe() {
+    void testDeplacerDe() throws BloxException {
         IPiece piece = new IPiece(new Coordonnees(0, 0), Couleur.BLEU);
         piece.deplacerDe(1, 1);
         assertEquals(new Element(1, 1, Couleur.BLEU), piece.getElements().get(0), "Vérifier élément 1");
@@ -54,7 +51,7 @@ public class IPieceTest {
     }
 
     @Test
-    void testTournerHoraire() {
+    void testTournerHoraire() throws BloxException {
         IPiece piece = new IPiece(new Coordonnees(2, 2), Couleur.BLEU);
         piece.tourner(true);
         assertEquals(new Element(2, 2, Couleur.BLEU), piece.getElements().get(0), "Vérifier élément 1");
@@ -64,7 +61,7 @@ public class IPieceTest {
     }
 
     @Test
-    void testTournerAntiHoraire() {
+    void testTournerAntiHoraire() throws BloxException {
         IPiece piece = new IPiece(new Coordonnees(3, 3), Couleur.BLEU);
         piece.tourner(false);
         assertEquals(new Element(3, 3, Couleur.BLEU), piece.getElements().get(0), "Vérifier élément 1");

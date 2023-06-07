@@ -4,6 +4,7 @@ import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.List;
 import java.util.Objects;
 
 public class Puits {
@@ -71,6 +72,7 @@ public class Puits {
     }
 
     public void setPieceSuivante(Piece piece) {
+        piece.setPuits(this);
         // Check if there is a current piece
         if (this.pieceSuivante != null) {
             // If there is, set the next piece as the current one and move it
@@ -88,6 +90,25 @@ public class Puits {
 
     public Tas getTas() {
         return this.tas;
+    }
+
+    public boolean sorti(List<Element> elements) {
+        // Check if the piece is out of the pit
+        for (Element element : elements) {
+            if (element.getCoordonnees().getAbscisse() < 0 || element.getCoordonnees().getAbscisse() >= this.getLargeur())
+                return true;
+        }
+
+        return false;
+    }
+
+    public boolean sortiFond(List<Element> elements) {
+        // Check if the piece is out of the pit
+        for (Element element : elements) {
+            if (element.getCoordonnees().getOrdonnee() >= this.getProfondeur()) return true;
+        }
+
+        return false;
     }
 
     @Override
