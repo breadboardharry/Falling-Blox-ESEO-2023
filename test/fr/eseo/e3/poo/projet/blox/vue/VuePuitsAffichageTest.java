@@ -1,6 +1,7 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.Tas;
 import fr.eseo.e3.poo.projet.blox.modele.UsineDePiece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
@@ -13,6 +14,7 @@ public class VuePuitsAffichageTest {
         testConstructeurPuitsTaille();
         testConstructeurPuits();
         testAffichagePiece();
+        testExceptions();
     }
 
     // Run test thread
@@ -23,6 +25,34 @@ public class VuePuitsAffichageTest {
                 new VuePuitsAffichageTest();
             }
         });
+    }
+
+    private void testExceptions() {
+        // Create puits
+        Puits puits = new Puits(12, 24);
+        VuePuits vuePuits = new VuePuits(puits, 25);
+
+        // Generate pieces
+        UsineDePiece.setMode(UsineDePiece.CYCLIC);
+        Piece piece1 = UsineDePiece.genererPiece();
+        Piece piece2 = UsineDePiece.genererPiece();
+
+        // Set the piece to display
+        puits.setPieceSuivante(piece2);
+        puits.setPieceSuivante(piece1);
+
+        // Create frame
+        JFrame frame = new JFrame("Puits exceptions");
+        frame.setSize(puits.getLargeur() * vuePuits.getTaille(), puits.getProfondeur() * vuePuits.getTaille());
+        frame.setResizable(false); // Disable resize
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close on exit
+
+        // Center the frame
+        frame.setLocationRelativeTo(null);
+
+        // Show frame
+        frame.setVisible(true);
+        frame.add(vuePuits);
     }
 
     private void testConstructeurPuits() {

@@ -76,6 +76,16 @@ public class ElementTest {
     }
 
     @Test
+    void testCollision() {
+        Element e1 = new Element(new Coordonnees(1, 2), Couleur.BLEU);
+        Element e2 = new Element(new Coordonnees(1, 2), Couleur.ROUGE);
+        Element e3 = new Element(new Coordonnees(2, 1), Couleur.ORANGE);
+
+        assertEquals(true, e1.collision(e2), "Collision de deux elements");
+        assertEquals(false, e1.collision(e3), "Non collision de deux elements");
+    }
+
+    @Test
     void testEquals() {
         Element e1 = new Element(new Coordonnees(1, 2), Couleur.BLEU);
         Element e2 = new Element(new Coordonnees(1, 2), Couleur.BLEU);

@@ -1,8 +1,11 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+import fr.eseo.e3.poo.projet.blox.modele.pieces.OPiece;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class TasTest {
 
@@ -28,11 +31,23 @@ public class TasTest {
 
         try {
             Tas tas2 = new Tas(puit, 40, 3);
-            fail("Vérifier nombre d'éléments, une exception aurait dû être levée");
+            fail("Vérifier nombre d'éléLments, une exception aurait dû être levée");
         }
         catch (IllegalArgumentException e) {
             assertEquals("Le nombre d'éléments doit être inférieur au nombre de cases du puits", e.getMessage(), "Constructeur tas nbElements et nbLignes");
         }
+    }
+
+    @Test
+    void testCollision() {
+        Puits puit = new Puits();
+        OPiece p = new OPiece(new Coordonnees(0, 0), Couleur.ROUGE);
+
+        Tas tas1 = new Tas(puit, 0, 10);
+        assertFalse(tas1.collision(p.getElements()), "Pas de collision");
+
+        Tas tas2 = new Tas(puit, 99, 10);
+        assertFalse(tas2.collision(p.getElements()), "Collision");
     }
 
     private int getNbElements(Tas tas) {
