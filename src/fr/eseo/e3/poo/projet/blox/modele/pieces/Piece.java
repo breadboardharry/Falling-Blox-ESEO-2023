@@ -1,9 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.modele.pieces;
 
-import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
-import fr.eseo.e3.poo.projet.blox.modele.Couleur;
-import fr.eseo.e3.poo.projet.blox.modele.Element;
-import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,17 +33,45 @@ public abstract class Piece {
         this.puits = puits;
     }
 
-    public void deplacerDe(int deltaX, int deltaY) {
-        // Check inputs
-        if ((deltaX > 1 || deltaX < -1) || (deltaY > 1 || deltaY < 0))
-            throw new IllegalArgumentException("Delta X must be between -1 and 1 and Delta Y must be between 0 and 1");
-
-        // Move each element
-        for (Element element : this.elements)
-            element.deplacerDe(deltaX, deltaY);
+    private List<Element> getElementsCopy() {
+        List<Element> copy = new ArrayList<>();
+        for (Element element : this.elements) {
+            copy.add(new Element(new Coordonnees(element.getCoordonnees().getAbscisse(), element.getCoordonnees().getOrdonnee()), element.getCouleur()));
+        }
+        return copy;
     }
 
-    public void tourner(boolean sensHoraire) {
+    public void deplacerDe(int deltaX, int deltaY) throws BloxException {
+        // Check inputs
+        if ((deltaX > 1 || deltaX < -1) || (deltaY > 1 || deltaY < 0)) {
+            throw new IllegalArgumentException("Delta X must be between -1 and 1 and Delta Y must be between 0 and 1");
+        }
+
+        // Copy the elements
+        List<Element> copy = this.getElementsCopy();
+        // Move the copied elements
+        for (Element element : copy) element.deplacerDe(deltaX, deltaY);
+
+        // Test if the piece do not overlap with another piece
+        if (this.puits != null && this.puits.getTas().collision(copy)) {
+            throw new BloxException("Collision avec un autre élément", BloxException.BLOX_COLLISION);
+        }
+
+        // Check if the piece is out of bounds
+        if (this.puits != null && this.puits.sorti(copy)) {
+            throw new BloxException("Sortie du puits", BloxException.BLOX_SORTIE_PUITS);
+        }
+
+        // Check if the piece overlap with the bottom
+        if (this.puits != null && this.puits.sortiFond(copy)) {
+            throw new BloxException("Sort du fond", BloxException.BLOX_COLLISION);
+        }
+
+        // Everything is fine, move the piece
+        for (Element element : this.elements) element.deplacerDe(deltaX, deltaY);
+    }
+
+    public void tourner(boolean sensHoraire) throws BloxException {
         // Get the pivot
         Element pivot = this.elements.get(0);
         int pivotX = pivot.getCoordonnees().getAbscisse();
@@ -57,8 +82,38 @@ public abstract class Piece {
         double cos = Math.cos(sign * Math.PI / 2);
         double sin = Math.sin(sign * Math.PI / 2);
 
+        // Copy the elements
+        List<Element> copy = this.getElementsCopy();
 
-        // Iterate over all elements and rotate them around the pivot
+        for (Element element : copy) {
+            // Translate element coordinates to origin
+            int x = element.getCoordonnees().getAbscisse() - pivotX;
+            int y = element.getCoordonnees().getOrdonnee() - pivotY;
+
+            // Apply rotation transformation
+            int rotatedX = (int) Math.round(x * cos - y * sin);
+            int rotatedY = (int) Math.round(x * sin + y * cos);
+
+            // Translate back to original coordinates and update element
+            element.setCoordonnees(new Coordonnees(rotatedX + pivotX, rotatedY + pivotY));
+        }
+
+        // Test if the piece do not overlap with another piece
+        if (this.puits != null && this.puits.getTas().collision(copy)) {
+            throw new BloxException("Collision avec un autre élément", BloxException.BLOX_COLLISION);
+        }
+
+        // Check if the piece is out of bounds
+        if (this.puits != null && this.puits.sorti(copy)) {
+            throw new BloxException("Sortie du puits", BloxException.BLOX_SORTIE_PUITS);
+        }
+
+        // Check if the piece overlap with the bottom
+        if (this.puits != null && this.puits.sortiFond(copy)) {
+            throw new BloxException("Sort du fond", BloxException.BLOX_COLLISION);
+        }
+
+        // Iterate over all elements and rotate them around the pivot if everything is fine
         for (Element element : elements) {
             // Translate element coordinates to origin
             int x = element.getCoordonnees().getAbscisse() - pivotX;

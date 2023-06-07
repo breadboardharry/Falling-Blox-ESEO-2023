@@ -1,5 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.controleur;
 
+import fr.eseo.e3.poo.projet.blox.modele.BloxException;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
@@ -30,7 +31,11 @@ public class PieceDeplacement extends MouseAdapter {
     public void mouseWheelMoved(MouseWheelEvent event) {
         if (this.puits.getPieceActuelle() != null) {
             if (event.getWheelRotation() > 0) {
-                this.puits.getPieceActuelle().deplacerDe(0, 1);
+                try {
+                    this.puits.getPieceActuelle().deplacerDe(0, 1);
+                } catch (BloxException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }
@@ -47,7 +52,11 @@ public class PieceDeplacement extends MouseAdapter {
             else if (currentColunm != this.lastColunm) {
                 int dx = currentColunm - this.lastColunm;
                 dx = dx > 0 ? 1 : -1;
-                this.puits.getPieceActuelle().deplacerDe(dx, 0);
+                try {
+                    this.puits.getPieceActuelle().deplacerDe(dx, 0);
+                } catch (BloxException e) {
+                    throw new RuntimeException(e);
+                }
                 this.lastColunm = currentColunm;
             }
         }
