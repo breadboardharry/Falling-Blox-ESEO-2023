@@ -35,6 +35,12 @@ public class Tas {
         return false;
     }
 
+    public void ajouterElements(Piece piece) {
+        for (Element element : piece.getElements()) {
+            this.elements[element.getCoordonnees().getOrdonnee()][element.getCoordonnees().getAbscisse()] = element;
+        }
+    }
+
     public Puits getPuits() {
         return puits;
     }
