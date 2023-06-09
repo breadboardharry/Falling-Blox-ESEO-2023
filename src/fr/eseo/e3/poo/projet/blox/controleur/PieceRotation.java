@@ -39,5 +39,6 @@ public class PieceRotation extends MouseAdapter {
                 throw new RuntimeException(e);
             }
         }
+        this.vuePuits.repaint();
     }
 }
