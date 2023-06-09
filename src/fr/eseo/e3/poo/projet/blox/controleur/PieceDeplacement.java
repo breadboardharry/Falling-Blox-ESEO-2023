@@ -30,11 +30,7 @@ public class PieceDeplacement extends MouseAdapter {
     public void mouseWheelMoved(MouseWheelEvent event) {
         if (this.puits.getPieceActuelle() != null) {
             if (event.getWheelRotation() > 0) {
-                try {
-                    this.puits.getPieceActuelle().deplacerDe(0, 1);
-                } catch (BloxException e) {
-                    throw new RuntimeException(e);
-                }
+                this.puits.gravite();
             }
         }
         this.vuePuits.repaint();

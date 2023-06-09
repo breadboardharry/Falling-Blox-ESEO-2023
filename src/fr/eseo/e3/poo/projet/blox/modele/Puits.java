@@ -1,5 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+import fr.eseo.e3.poo.projet.blox.controleur.Gravite;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
 import java.beans.PropertyChangeListener;
@@ -20,7 +21,6 @@ public class Puits {
     private Piece pieceActuelle;
     private Piece pieceSuivante;
     private Tas tas;
-
 
     private PropertyChangeSupport pcs;
 
@@ -126,7 +126,6 @@ public class Puits {
             this.pieceActuelle.deplacerDe(0, 1);
         }
         catch (BloxException e) {
-            System.out.println(e.getType());
             // Check if the piece is out of the pit
             if (e.getType() == BloxException.BLOX_COLLISION) this.gererCollision();
             else throw new RuntimeException(e);
