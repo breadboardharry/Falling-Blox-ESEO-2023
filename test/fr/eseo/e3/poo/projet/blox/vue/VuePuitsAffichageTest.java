@@ -128,7 +128,7 @@ public class VuePuitsAffichageTest {
     private void testAffichageTas() {
         // Create puits
         Puits puits = new Puits(12, 20, 35, 10);
-        VuePuits vuePuits = new VuePuits(puits, 20);
+        VuePuits vuePuits = new VuePuits(puits, 22);
 
         // Generate pieces
         UsineDePiece.setMode(UsineDePiece.CYCLIC);
