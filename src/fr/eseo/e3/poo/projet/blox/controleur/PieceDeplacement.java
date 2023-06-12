@@ -4,12 +4,14 @@ import fr.eseo.e3.poo.projet.blox.modele.BloxException;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
-import javax.swing.*;
+import javax.swing.SwingUtilities;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseWheelEvent;
+import java.awt.event.KeyEvent;
 
-public class PieceDeplacement extends MouseAdapter {
+public class PieceDeplacement extends MouseAdapter implements KeyListener  {
 
     private VuePuits vuePuits;
     private Puits puits;
@@ -69,5 +71,49 @@ public class PieceDeplacement extends MouseAdapter {
             this.puits.dropdown();
         }
         this.vuePuits.repaint();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int key = e.getKeyCode();
+
+        switch (key) {
+            // [→] - Move to right
+            case KeyEvent.VK_RIGHT:
+                try {
+                    this.puits.getPieceActuelle().deplacerDe(1, 0);
+                } catch (BloxException ex) {
+                    throw new RuntimeException(ex);
+                }
+                this.vuePuits.repaint();
+                break;
+
+            // [←] - Move down
+            case KeyEvent.VK_LEFT:
+                try {
+                    this.puits.getPieceActuelle().deplacerDe(-1, 0);
+                } catch (BloxException ex) {
+                    throw new RuntimeException(ex);
+                }
+                this.vuePuits.repaint();
+                break;
+
+            // [↓] - Move down
+            case KeyEvent.VK_DOWN:
+                this.puits.gravite();
+                this.vuePuits.repaint();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
     }
 }

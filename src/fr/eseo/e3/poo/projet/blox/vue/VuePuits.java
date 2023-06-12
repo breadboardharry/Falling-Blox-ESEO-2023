@@ -2,6 +2,7 @@ package fr.eseo.e3.poo.projet.blox.vue;
 
 import fr.eseo.e3.poo.projet.blox.controleur.Gravite;
 import fr.eseo.e3.poo.projet.blox.controleur.PieceDeplacement;
+import fr.eseo.e3.poo.projet.blox.controleur.PieceInteraction;
 import fr.eseo.e3.poo.projet.blox.controleur.PieceRotation;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
@@ -24,6 +25,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
 
     private PieceDeplacement pieceDeplacement;
     private PieceRotation pieceRotation;
+    private PieceInteraction pieceInteraction;
 
     public VuePuits(Puits puits, int taille) {
         super();
@@ -31,17 +33,22 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         this.setTaille(taille);
         this.pieceDeplacement = new PieceDeplacement(this);
         this.pieceRotation = new PieceRotation(this);
+        this.pieceInteraction = new PieceInteraction(this);
         this.vueTas = new VueTas(this);
 
         this.addMouseListener(this.pieceDeplacement);
         this.addMouseListener(this.pieceRotation);
         this.addMouseMotionListener(this.pieceDeplacement);
         this.addMouseWheelListener(this.pieceDeplacement);
+        this.addKeyListener(this.pieceDeplacement);
+        this.addKeyListener(this.pieceRotation);
+        this.addKeyListener(this.pieceInteraction);
 
         this.setPreferredSize(new Dimension(
                 this.puits.getLargeur() * this.taille,
                 this.puits.getProfondeur() * this.taille
         ));
+        this.setFocusable(true);
     }
 
     public void setGravite(Gravite gravite) {
@@ -111,8 +118,10 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent event) {
+        System.out.println("VuePuits.propertyChange() : " + event.getPropertyName());
         // If next piece has changed, update the view
         if (event.getPropertyName().equals(Puits.MODIFICATION_PIECE_ACTUELLE)) {
+            System.out.println("VuePuits.propertyChange() : " + event.getNewValue());
             Piece piece = (Piece) event.getNewValue();
             this.setVuePiece(new VuePiece(piece, this.taille));
         }

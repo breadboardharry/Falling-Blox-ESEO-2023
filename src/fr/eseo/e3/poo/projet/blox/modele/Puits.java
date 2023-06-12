@@ -3,6 +3,7 @@ package fr.eseo.e3.poo.projet.blox.modele;
 import fr.eseo.e3.poo.projet.blox.controleur.Gravite;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
+import javax.swing.text.Position;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
@@ -128,6 +129,25 @@ public class Puits {
         this.tas.ajouterElements(this.pieceActuelle);
         UsineDePiece.setMode(UsineDePiece.ALEATOIRE_COMPLET);
         this.setPieceSuivante(UsineDePiece.genererPiece());
+    }
+
+    public void echangerPiece() {
+        if (this.pieceActuelle == null || this.pieceSuivante == null) return;
+
+        // Swap the current piece with the next one
+        Piece tempPiece = this.pieceActuelle;
+        this.pieceActuelle = this.pieceSuivante;
+        this.pieceSuivante = tempPiece;
+
+        // Set the position of the current piece
+        this.pieceActuelle.setPosition(
+                tempPiece.getElements().get(0).getCoordonnees().getAbscisse(),
+                tempPiece.getElements().get(0).getCoordonnees().getOrdonnee()
+        );
+
+        // Trigger the listeners
+        pcs.firePropertyChange(MODIFICATION_PIECE_ACTUELLE, this.pieceSuivante, this.pieceActuelle);
+        pcs.firePropertyChange(MODIFICATION_PIECE_SUIVANTE, this.pieceActuelle, this.pieceSuivante);
     }
 
     public void gravite() {
