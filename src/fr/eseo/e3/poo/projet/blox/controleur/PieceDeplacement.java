@@ -4,9 +4,9 @@ import fr.eseo.e3.poo.projet.blox.modele.BloxException;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
+import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 
 public class PieceDeplacement extends MouseAdapter {
@@ -55,6 +55,18 @@ public class PieceDeplacement extends MouseAdapter {
                 }
                 this.lastColunm = currentColunm;
             }
+        }
+        this.vuePuits.repaint();
+    }
+
+    public void mousePressed(MouseEvent event) {
+        // Check if there is a piece defined
+        if (this.puits.getPieceActuelle() == null) {
+            return;
+        }
+
+        if (SwingUtilities.isMiddleMouseButton(event)) {
+            this.puits.dropdown();
         }
         this.vuePuits.repaint();
     }

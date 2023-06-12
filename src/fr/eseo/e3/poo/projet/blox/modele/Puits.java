@@ -141,6 +141,22 @@ public class Puits {
         }
     }
 
+    /**
+     * Make the current piece fall until it collides with another piece
+     */
+    public void dropdown() {
+        try {
+            while (true) {
+                this.pieceActuelle.deplacerDe(0, 1);
+            }
+        }
+        catch (BloxException e) {
+            // Check if the piece is out of the pit
+            if (e.getType() == BloxException.BLOX_COLLISION) this.gererCollision();
+            else throw new RuntimeException(e);
+        }
+    }
+
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         this.pcs.addPropertyChangeListener(listener);
     }
