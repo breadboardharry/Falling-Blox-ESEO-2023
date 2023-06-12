@@ -35,6 +35,11 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         this.addMouseListener(this.pieceRotation);
         this.addMouseMotionListener(this.pieceDeplacement);
         this.addMouseWheelListener(this.pieceDeplacement);
+
+        this.setPreferredSize(new Dimension(
+                this.puits.getLargeur() * this.taille,
+                this.puits.getProfondeur() * this.taille
+        ));
     }
 
     public void setGravite(Gravite gravite) {
