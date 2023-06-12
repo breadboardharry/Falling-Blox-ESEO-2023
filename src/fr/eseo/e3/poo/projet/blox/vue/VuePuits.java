@@ -88,9 +88,9 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
 
         // Draw grid
         g2D.setColor(java.awt.Color.LIGHT_GRAY);
-        for (int x = 0; x < getWidth(); x += this.taille) {
-            for (int y = 0; y < getHeight(); y += this.taille) {
-                g2D.drawRect(x, y, this.taille, this.taille);
+        for (int x = 0; x < this.puits.getLargeur(); x++) {
+            for (int y = 0; y < this.puits.getProfondeur(); y++) {
+                g2D.drawRect(x * this.taille, y * this.taille, this.taille, this.taille);
             }
         }
 
