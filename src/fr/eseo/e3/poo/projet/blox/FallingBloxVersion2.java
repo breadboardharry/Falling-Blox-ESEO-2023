@@ -2,6 +2,7 @@ package fr.eseo.e3.poo.projet.blox;
 
 import fr.eseo.e3.poo.projet.blox.controleur.Gravite;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.Score;
 import fr.eseo.e3.poo.projet.blox.modele.UsineDePiece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 import fr.eseo.e3.poo.projet.blox.vue.PanneauInformation;
@@ -29,6 +30,7 @@ public class FallingBloxVersion2 {
         Puits puits = new Puits(8, 20);
         VuePuits vuePuits = new VuePuits(puits, 20);
         Gravite gravite = new Gravite(vuePuits);
+        Score score = new Score(gravite);
 
         PanneauInformation panneauInformation = new PanneauInformation(puits);
 
@@ -42,6 +44,7 @@ public class FallingBloxVersion2 {
         puits.setPieceSuivante(piece1);
 
         vuePuits.setGravite(gravite);
+        puits.setScore(score);
 
         /* --------- FRAME --------- */
 

@@ -75,11 +75,16 @@ public class Tas {
         for (int ligne = this.puits.getProfondeur() - 1; ligne >= 0; ligne--) {
             // If the line is full
             if (this.ligneRemplie(ligne)) {
+                // Makes fall the lines above
                 for (int i = ligne; i > 0; i--) {
                     this.viderLigne(i);
                     this.copierLigne(i - 1, i);
                     this.viderLigne(i-1);
                 }
+                // Add 10 points to the score
+                this.puits.getScore().ajouter(10);
+                // Recheck the line
+                ligne += 1;
             }
         }
     }

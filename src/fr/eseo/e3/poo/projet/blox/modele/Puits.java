@@ -21,6 +21,7 @@ public class Puits {
     private Piece pieceActuelle;
     private Piece pieceSuivante;
     private Tas tas;
+    private Score score;
 
     private PropertyChangeSupport pcs;
 
@@ -86,6 +87,14 @@ public class Puits {
         Piece prevPiece = this.pieceSuivante;
         this.pieceSuivante = piece;
         pcs.firePropertyChange(MODIFICATION_PIECE_SUIVANTE, prevPiece, this.pieceSuivante);
+    }
+
+    public Score getScore() {
+        return this.score;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
     }
 
     public void setTas(Tas tas) {
