@@ -1,8 +1,13 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
-import fr.eseo.e3.poo.projet.blox.modele.pieces.IPiece;
-import fr.eseo.e3.poo.projet.blox.modele.pieces.OPiece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.OPiece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.IPiece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.TPiece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.LPiece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.JPiece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.ZPiece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.SPiece;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +85,11 @@ public class UsineDePiece {
         List<Piece> list = new ArrayList<Piece>();
         list.add(new OPiece(new Coordonnees(0, 0), Couleur.ROUGE));
         list.add(new IPiece(new Coordonnees(0, 0), Couleur.ORANGE));
+        list.add(new TPiece(new Coordonnees(0, 0), Couleur.BLEU));
+        list.add(new LPiece(new Coordonnees(0, 0), Couleur.VERT));
+        list.add(new JPiece(new Coordonnees(0, 0), Couleur.JAUNE));
+        list.add(new ZPiece(new Coordonnees(0, 0), Couleur.CYAN));
+        list.add(new SPiece(new Coordonnees(0, 0), Couleur.VIOLET));
         return list;
     }
 
@@ -87,6 +97,11 @@ public class UsineDePiece {
         List<Piece> list = new ArrayList<Piece>();
         list.add(new OPiece(new Coordonnees(0, 0), couleur));
         list.add(new IPiece(new Coordonnees(0, 0), couleur));
+        list.add(new TPiece(new Coordonnees(0, 0), couleur));
+        list.add(new LPiece(new Coordonnees(0, 0), couleur));
+        list.add(new JPiece(new Coordonnees(0, 0), couleur));
+        list.add(new ZPiece(new Coordonnees(0, 0), couleur));
+        list.add(new SPiece(new Coordonnees(0, 0), couleur));
         return list;
     }
 }
