@@ -1,5 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
+import fr.eseo.e3.poo.projet.blox.controleur.Gravite;
 import fr.eseo.e3.poo.projet.blox.controleur.PieceDeplacement;
 import fr.eseo.e3.poo.projet.blox.controleur.PieceRotation;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
@@ -17,6 +18,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     private int taille;
     private VuePiece vuePiece;
     private final VueTas vueTas;
+    private Gravite gravite;
 
     private PieceDeplacement pieceDeplacement;
     private PieceRotation pieceRotation;
@@ -33,6 +35,19 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         this.addMouseListener(this.pieceRotation);
         this.addMouseMotionListener(this.pieceDeplacement);
         this.addMouseWheelListener(this.pieceDeplacement);
+
+        this.setPreferredSize(new Dimension(
+                this.puits.getLargeur() * this.taille,
+                this.puits.getProfondeur() * this.taille
+        ));
+    }
+
+    public void setGravite(Gravite gravite) {
+        this.gravite = gravite;
+    }
+
+    public Gravite getGravite() {
+        return gravite;
     }
 
     public VuePuits(Puits puits) {
@@ -78,9 +93,9 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
 
         // Draw grid
         g2D.setColor(java.awt.Color.LIGHT_GRAY);
-        for (int x = 0; x < getWidth(); x += this.taille) {
-            for (int y = 0; y < getHeight(); y += this.taille) {
-                g2D.drawRect(x, y, this.taille, this.taille);
+        for (int x = 0; x < this.puits.getLargeur(); x++) {
+            for (int y = 0; y < this.puits.getProfondeur(); y++) {
+                g2D.drawRect(x * this.taille, y * this.taille, this.taille, this.taille);
             }
         }
 
@@ -89,7 +104,6 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         // Display the tas
         this.vueTas.afficher(g2D);
 
-        repaint();
         g2D.dispose();
     }
 

@@ -1,6 +1,7 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.Tas;
 import fr.eseo.e3.poo.projet.blox.modele.UsineDePiece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
@@ -40,6 +41,9 @@ public class VuePuitsAffichageTest {
         // Set the piece to display
         puits.setPieceSuivante(piece2);
         puits.setPieceSuivante(piece1);
+
+        Tas tas = new Tas(puits);
+        puits.setTas(tas);
 
         // Create frame
         JFrame frame = new JFrame("Puits exceptions");
@@ -123,8 +127,8 @@ public class VuePuitsAffichageTest {
 
     private void testAffichageTas() {
         // Create puits
-        Puits puits = new Puits(12, 24, 56, 10);
-        VuePuits vuePuits = new VuePuits(puits, 25);
+        Puits puits = new Puits(12, 20, 35, 10);
+        VuePuits vuePuits = new VuePuits(puits, 22);
 
         // Generate pieces
         UsineDePiece.setMode(UsineDePiece.CYCLIC);

@@ -1,5 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+import fr.eseo.e3.poo.projet.blox.controleur.Gravite;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
 import java.beans.PropertyChangeListener;
@@ -20,7 +21,6 @@ public class Puits {
     private Piece pieceActuelle;
     private Piece pieceSuivante;
     private Tas tas;
-
 
     private PropertyChangeSupport pcs;
 
@@ -88,6 +88,10 @@ public class Puits {
         pcs.firePropertyChange(MODIFICATION_PIECE_SUIVANTE, prevPiece, this.pieceSuivante);
     }
 
+    public void setTas(Tas tas) {
+        this.tas = tas;
+    }
+
     public Tas getTas() {
         return this.tas;
     }
@@ -111,6 +115,31 @@ public class Puits {
         return false;
     }
 
+    private void gererCollision() {
+        this.tas.ajouterElements(this.pieceActuelle);
+        UsineDePiece.setMode(UsineDePiece.ALEATOIRE_COMPLET);
+        this.setPieceSuivante(UsineDePiece.genererPiece());
+    }
+
+    public void gravite() {
+        try {
+            this.pieceActuelle.deplacerDe(0, 1);
+        }
+        catch (BloxException e) {
+            // Check if the piece is out of the pit
+            if (e.getType() == BloxException.BLOX_COLLISION) this.gererCollision();
+            else throw new RuntimeException(e);
+        }
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        this.pcs.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        this.pcs.removePropertyChangeListener(listener);
+    }
+
     @Override
     public String toString() {
         // Display Puits dimensions
@@ -131,14 +160,6 @@ public class Puits {
             str.append(this.getPieceSuivante().toString());
 
         return str.toString();
-    }
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        this.pcs.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        this.pcs.removePropertyChangeListener(listener);
     }
 
     @Override

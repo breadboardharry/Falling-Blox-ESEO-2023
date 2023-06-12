@@ -39,6 +39,24 @@ public class PuitsTest {
         assertEquals(40, getNbElements(puits.getTas()), "Vérifier tas");
     }
 
+    @Test
+    void testGravite() {
+        Puits puits = new Puits(12, 15);
+        OPiece piece1 = new OPiece(new Coordonnees(2, 2), Couleur.ORANGE);
+        OPiece piece2 = new OPiece(new Coordonnees(2, 2), Couleur.ORANGE);
+        puits.setPieceSuivante(piece1);
+        puits.setPieceSuivante(piece2);
+
+        Tas tas = new Tas(puits, 0, 0);
+        puits.setTas(tas);
+
+        // Make the piece fall
+        for (int i = 0; i < 19; i++) puits.gravite();
+
+        // Check if the piece has fallen
+        assertNotNull(tas.getElements()[puits.getProfondeur()-1]);
+    }
+
     private int getNbElements(Tas tas) {
         Element[][] elements = tas.getElements();
         int nbElements = 0;
