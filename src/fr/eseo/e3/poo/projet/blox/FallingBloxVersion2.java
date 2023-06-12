@@ -26,7 +26,7 @@ public class FallingBloxVersion2 {
 
     protected static void run(int nbElements, int nbLignes) {
         // Create puits
-        Puits puits = new Puits(5, 20);
+        Puits puits = new Puits(8, 20);
         VuePuits vuePuits = new VuePuits(puits, 20);
         Gravite gravite = new Gravite(vuePuits);
 
@@ -47,7 +47,10 @@ public class FallingBloxVersion2 {
 
         // Create frame
         JFrame frame = new JFrame("Falling Blox");
-        frame.setSize(puits.getLargeur() * vuePuits.getTaille() + PanneauInformation.PREFERRED_SIZE + PanneauInformation.TAILLE_PREVIEW_PIECE_SUIVANTE, puits.getProfondeur() * vuePuits.getTaille());
+        frame.setSize(
+                puits.getLargeur() * vuePuits.getTaille() + PanneauInformation.TOTAL_SIZE,
+                puits.getProfondeur() * vuePuits.getTaille() + 37
+        );
         frame.setResizable(false); // Disable resize
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close on exit
 
