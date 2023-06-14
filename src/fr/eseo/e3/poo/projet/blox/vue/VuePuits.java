@@ -31,11 +31,14 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         super();
         this.setPuits(puits);
         this.setTaille(taille);
+        // Create controlers
         this.pieceDeplacement = new PieceDeplacement(this);
         this.pieceRotation = new PieceRotation(this);
         this.pieceInteraction = new PieceInteraction(this);
+
         this.vueTas = new VueTas(this);
 
+        // Add listeners
         this.addMouseListener(this.pieceDeplacement);
         this.addMouseListener(this.pieceRotation);
         this.addMouseMotionListener(this.pieceDeplacement);
@@ -48,6 +51,8 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
                 this.puits.getLargeur() * this.taille,
                 this.puits.getProfondeur() * this.taille
         ));
+
+        // Make the window sensitive to focus (keyListener)
         this.setFocusable(true);
     }
 

@@ -5,9 +5,8 @@ import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
 
-public class PieceInteraction extends MouseAdapter implements KeyListener {
+public class PieceInteraction implements KeyListener {
 
     private VuePuits vuePuits;
     private Puits puits;

@@ -32,7 +32,7 @@ public class FallingBloxVersion2 {
         Gravite gravite = new Gravite(vuePuits);
         Score score = new Score(gravite);
 
-        PanneauInformation panneauInformation = new PanneauInformation(puits);
+        PanneauInformation panneauInformation = new PanneauInformation(puits, score);
 
         // Generate pieces
         UsineDePiece.setMode(UsineDePiece.ALEATOIRE_COMPLET);
