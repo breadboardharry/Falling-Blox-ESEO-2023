@@ -1,8 +1,14 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
-import fr.eseo.e3.poo.projet.blox.modele.pieces.IPiece;
-import fr.eseo.e3.poo.projet.blox.modele.pieces.OPiece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.OPiece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.IPiece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.TPiece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.LPiece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.JPiece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.ZPiece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.SPiece;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -84,13 +90,13 @@ public class UsineDePieceTest {
     @Test
     void testGetPiecesArray() {
         List<Piece> pieces = UsineDePiece.getPiecesArray();
-        assertEquals(2, pieces.size(), "Vérifier taille pièces par défaut");
+        assertEquals(7, pieces.size(), "Vérifier taille pièces par défaut");
     }
 
     @Test
     void testGetPiecesArrayWithColor() {
         List<Piece> pieces = UsineDePiece.getPiecesArray(Couleur.CYAN);
-        assertEquals(2, pieces.size(), "Vérifier taille pièces avec couleur");
+        assertEquals(7, pieces.size(), "Vérifier taille pièces avec couleur");
     }
 
     // Create an array of pieces with a defined size
@@ -111,14 +117,24 @@ public class UsineDePieceTest {
         UsineDePiece.setMode(UsineDePiece.ALEATOIRE_COMPLET);
         final ArrayList<Piece> pieces = pieceArray(10000);
 
-        int nbIPiece = 0, nbOPiece = 0;
+        int nbIPiece = 0, nbOPiece = 0, nbTPiece = 0, nbLPiece = 0, nbJPiece = 0, nbZPiece = 0, nbSPiece = 0;
         for (Object piece : pieces) {
             if (piece instanceof IPiece) nbIPiece++;
             else if (piece instanceof OPiece) nbOPiece++;
+            else if (piece instanceof TPiece) nbTPiece++;
+            else if (piece instanceof LPiece) nbLPiece++;
+            else if (piece instanceof JPiece) nbJPiece++;
+            else if (piece instanceof ZPiece) nbZPiece++;
+            else if (piece instanceof SPiece) nbSPiece++;
         }
 
         // Check estimation of number of pieces
-        assertTrue(inInterval(nbIPiece, 4800, 5200), "Estimation nombre de IPiece [4800 - 5200] @ 10000");
-        assertTrue(inInterval(nbOPiece, 4800, 5200), "Estimation nombre de OPiece [4800 - 5200] @ 10000");
+        assertTrue(inInterval(nbIPiece, 1300, 1600), "Estimation nombre de IPiece [1300 - 1600] @ 10000");
+        assertTrue(inInterval(nbOPiece, 1300, 1600), "Estimation nombre de OPiece [1300 - 1600] @ 10000");
+        assertTrue(inInterval(nbTPiece, 1300, 1600), "Estimation nombre de OPiece [1300 - 1600] @ 10000");
+        assertTrue(inInterval(nbLPiece, 1300, 1600), "Estimation nombre de OPiece [1300 - 1600] @ 10000");
+        assertTrue(inInterval(nbJPiece, 1300, 1600), "Estimation nombre de OPiece [1300 - 1600] @ 10000");
+        assertTrue(inInterval(nbZPiece, 1300, 1600), "Estimation nombre de OPiece [1300 - 1600] @ 10000");
+        assertTrue(inInterval(nbSPiece, 1300, 1600), "Estimation nombre de OPiece [1300 - 1600] @ 10000");
     }
 }

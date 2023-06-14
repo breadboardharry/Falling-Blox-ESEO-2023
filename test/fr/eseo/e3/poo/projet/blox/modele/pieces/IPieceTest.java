@@ -14,32 +14,32 @@ public class IPieceTest {
 
     @Test
     void testConstructeur() {
-        IPiece piece = new IPiece(new Coordonnees(0, 0), Couleur.BLEU);
+        IPiece piece = new IPiece(new Coordonnees(0, 0), Couleur.ORANGE);
         assertEquals(4, piece.getElements().size(), "Vérifier nombre d'éléments");
     }
 
     @Test
     void testGetElements() {
-        IPiece piece = new IPiece(new Coordonnees(0, 0), Couleur.BLEU);
-        assertEquals(new Element(0, 0, Couleur.BLEU), piece.getElements().get(0), "Vérifier élément 1");
-        assertEquals(new Element(0, -2, Couleur.BLEU), piece.getElements().get(1), "Vérifier élément 2");
-        assertEquals(new Element(0, -1, Couleur.BLEU), piece.getElements().get(2), "Vérifier élément 3");
-        assertEquals(new Element(0, 1, Couleur.BLEU), piece.getElements().get(3), "Vérifier élément 4");
+        IPiece piece = new IPiece(new Coordonnees(0, 0), Couleur.ORANGE);
+        assertEquals(new Element(0, 0, Couleur.ORANGE), piece.getElements().get(0), "Vérifier élément 1");
+        assertEquals(new Element(0, -2, Couleur.ORANGE), piece.getElements().get(1), "Vérifier élément 2");
+        assertEquals(new Element(0, -1, Couleur.ORANGE), piece.getElements().get(2), "Vérifier élément 3");
+        assertEquals(new Element(0, 1, Couleur.ORANGE), piece.getElements().get(3), "Vérifier élément 4");
     }
 
     @Test
     void testSetPosition() {
-        IPiece piece = new IPiece(new Coordonnees(0, 0), Couleur.BLEU);
+        IPiece piece = new IPiece(new Coordonnees(0, 0), Couleur.ORANGE);
         piece.setPosition(1, 1);
-        assertEquals(new Element(1, 1, Couleur.BLEU), piece.getElements().get(0), "Vérifier élément 1");
-        assertEquals(new Element(1, -1, Couleur.BLEU), piece.getElements().get(1), "Vérifier élément 2");
-        assertEquals(new Element(1, 0, Couleur.BLEU), piece.getElements().get(2), "Vérifier élément 3");
-        assertEquals(new Element(1, 2, Couleur.BLEU), piece.getElements().get(3), "Vérifier élément 4");
+        assertEquals(new Element(1, 1, Couleur.ORANGE), piece.getElements().get(0), "Vérifier élément 1");
+        assertEquals(new Element(1, -1, Couleur.ORANGE), piece.getElements().get(1), "Vérifier élément 2");
+        assertEquals(new Element(1, 0, Couleur.ORANGE), piece.getElements().get(2), "Vérifier élément 3");
+        assertEquals(new Element(1, 2, Couleur.ORANGE), piece.getElements().get(3), "Vérifier élément 4");
     }
 
     @Test
     void testPuits() {
-        IPiece piece = new IPiece(new Coordonnees(0, 0), Couleur.BLEU);
+        IPiece piece = new IPiece(new Coordonnees(0, 0), Couleur.ORANGE);
         Puits puits = new Puits();
         piece.setPuits(puits);
         assertEquals(puits, piece.getPuits(), "Vérifier puits");
@@ -47,12 +47,12 @@ public class IPieceTest {
 
     @Test
     void testDeplacerDe() throws BloxException {
-        IPiece piece = new IPiece(new Coordonnees(0, 0), Couleur.BLEU);
+        IPiece piece = new IPiece(new Coordonnees(0, 0), Couleur.ORANGE);
         piece.deplacerDe(1, 1);
-        assertEquals(new Element(1, 1, Couleur.BLEU), piece.getElements().get(0), "Vérifier élément 1");
-        assertEquals(new Element(1, -1, Couleur.BLEU), piece.getElements().get(1), "Vérifier élément 2");
-        assertEquals(new Element(1, 0, Couleur.BLEU), piece.getElements().get(2), "Vérifier élément 3");
-        assertEquals(new Element(1, 2, Couleur.BLEU), piece.getElements().get(3), "Vérifier élément 4");
+        assertEquals(new Element(1, 1, Couleur.ORANGE), piece.getElements().get(0), "Vérifier élément 1");
+        assertEquals(new Element(1, -1, Couleur.ORANGE), piece.getElements().get(1), "Vérifier élément 2");
+        assertEquals(new Element(1, 0, Couleur.ORANGE), piece.getElements().get(2), "Vérifier élément 3");
+        assertEquals(new Element(1, 2, Couleur.ORANGE), piece.getElements().get(3), "Vérifier élément 4");
     }
 
     @Test
@@ -73,31 +73,31 @@ public class IPieceTest {
 
     @Test
     void testTournerHoraire() throws BloxException {
-        IPiece piece = new IPiece(new Coordonnees(2, 2), Couleur.BLEU);
+        IPiece piece = new IPiece(new Coordonnees(2, 2), Couleur.ORANGE);
         piece.tourner(true);
-        assertEquals(new Element(2, 2, Couleur.BLEU), piece.getElements().get(0), "Vérifier élément 1");
-        assertEquals(new Element(4, 2, Couleur.BLEU), piece.getElements().get(1), "Vérifier élément 2");
-        assertEquals(new Element(3, 2, Couleur.BLEU), piece.getElements().get(2), "Vérifier élément 3");
-        assertEquals(new Element(1, 2, Couleur.BLEU), piece.getElements().get(3), "Vérifier élément 4");
+        assertEquals(new Element(2, 2, Couleur.ORANGE), piece.getElements().get(0), "Vérifier élément 1");
+        assertEquals(new Element(4, 2, Couleur.ORANGE), piece.getElements().get(1), "Vérifier élément 2");
+        assertEquals(new Element(3, 2, Couleur.ORANGE), piece.getElements().get(2), "Vérifier élément 3");
+        assertEquals(new Element(1, 2, Couleur.ORANGE), piece.getElements().get(3), "Vérifier élément 4");
     }
 
     @Test
     void testTournerAntiHoraire() throws BloxException {
-        IPiece piece = new IPiece(new Coordonnees(3, 3), Couleur.BLEU);
+        IPiece piece = new IPiece(new Coordonnees(3, 3), Couleur.ORANGE);
         piece.tourner(false);
-        assertEquals(new Element(3, 3, Couleur.BLEU), piece.getElements().get(0), "Vérifier élément 1");
-        assertEquals(new Element(1, 3, Couleur.BLEU), piece.getElements().get(1), "Vérifier élément 2");
-        assertEquals(new Element(2, 3, Couleur.BLEU), piece.getElements().get(2), "Vérifier élément 3");
-        assertEquals(new Element(4, 3, Couleur.BLEU), piece.getElements().get(3), "Vérifier élément 4");
+        assertEquals(new Element(3, 3, Couleur.ORANGE), piece.getElements().get(0), "Vérifier élément 1");
+        assertEquals(new Element(1, 3, Couleur.ORANGE), piece.getElements().get(1), "Vérifier élément 2");
+        assertEquals(new Element(2, 3, Couleur.ORANGE), piece.getElements().get(2), "Vérifier élément 3");
+        assertEquals(new Element(4, 3, Couleur.ORANGE), piece.getElements().get(3), "Vérifier élément 4");
     }
 
     @Test
     void testToString() {
-        IPiece piece = new IPiece(new Coordonnees(0, 0), Couleur.BLEU);
+        IPiece piece = new IPiece(new Coordonnees(0, 0), Couleur.ORANGE);
         assertEquals("IPiece :\n" +
-                "\t(0, 0) - BLEU\n" +
-                "\t(0, -2) - BLEU\n" +
-                "\t(0, -1) - BLEU\n" +
-                "\t(0, 1) - BLEU\n", piece.toString(), "Vérifier toString");
+                "\t(0, 0) - ORANGE\n" +
+                "\t(0, -2) - ORANGE\n" +
+                "\t(0, -1) - ORANGE\n" +
+                "\t(0, 1) - ORANGE\n", piece.toString(), "Vérifier toString");
     }
 }

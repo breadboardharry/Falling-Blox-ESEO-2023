@@ -3,6 +3,7 @@ package fr.eseo.e3.poo.projet.blox.modele;
 import fr.eseo.e3.poo.projet.blox.controleur.Gravite;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
+import javax.swing.text.Position;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
@@ -21,6 +22,7 @@ public class Puits {
     private Piece pieceActuelle;
     private Piece pieceSuivante;
     private Tas tas;
+    private Score score;
 
     private PropertyChangeSupport pcs;
 
@@ -88,6 +90,14 @@ public class Puits {
         pcs.firePropertyChange(MODIFICATION_PIECE_SUIVANTE, prevPiece, this.pieceSuivante);
     }
 
+    public Score getScore() {
+        return this.score;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
+    }
+
     public void setTas(Tas tas) {
         this.tas = tas;
     }
@@ -121,9 +131,44 @@ public class Puits {
         this.setPieceSuivante(UsineDePiece.genererPiece());
     }
 
+    public void echangerPiece() {
+        if (this.pieceActuelle == null || this.pieceSuivante == null) return;
+
+        // Swap the current piece with the next one
+        Piece tempPiece = this.pieceActuelle;
+        this.pieceActuelle = this.pieceSuivante;
+        this.pieceSuivante = tempPiece;
+
+        // Set the position of the current piece
+        this.pieceActuelle.setPosition(
+                tempPiece.getElements().get(0).getCoordonnees().getAbscisse(),
+                tempPiece.getElements().get(0).getCoordonnees().getOrdonnee()
+        );
+
+        // Trigger the listeners
+        pcs.firePropertyChange(MODIFICATION_PIECE_ACTUELLE, this.pieceSuivante, this.pieceActuelle);
+        pcs.firePropertyChange(MODIFICATION_PIECE_SUIVANTE, this.pieceActuelle, this.pieceSuivante);
+    }
+
     public void gravite() {
         try {
             this.pieceActuelle.deplacerDe(0, 1);
+        }
+        catch (BloxException e) {
+            // Check if the piece is out of the pit
+            if (e.getType() == BloxException.BLOX_COLLISION) this.gererCollision();
+            else throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Make the current piece fall until it collides with another piece
+     */
+    public void dropdown() {
+        try {
+            while (true) {
+                this.pieceActuelle.deplacerDe(0, 1);
+            }
         }
         catch (BloxException e) {
             // Check if the piece is out of the pit
