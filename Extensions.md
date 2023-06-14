@@ -3,6 +3,7 @@
 ## Table des matières
 
 
+- [EXTENSIONS](#extensions)
   - [Table des matières](#table-des-matières)
   - [🧩 Échange de pièce](#-échange-de-pièce)
   - [🎹 Déplacements clavier](#-déplacements-clavier)
@@ -15,6 +16,8 @@
 ## 🧩 Échange de pièce
 
 `Description` : Lorsque le joueur appuie sur une touche, la pièce actuelle et la pièce suivante sont échangées.
+
+`Action` : Appui sur la touche `R`. 
 
 `Réalisation` :
 
@@ -42,11 +45,17 @@ Cette méthode permet d'échanger la pièce actuelle et la pièce suivante si el
 
 `Description` : Permettre au joueur de déplacer la pièce avec les flèches du clavier.
 
+`Action` :
+- Appui sur la touche `←` pour déplacer la pièce à gauche. 
+- Appui sur la touche `→` pour déplacer la pièce à droite. 
+- Appui sur la touche `↓` pour déplacer la pièce vers le bas. 
+- Appui sur la touche `↑` pour tourner la pièce.
+
 `Réalisation` :
 
 J'ai étendu les classes `PieceDeplacement` et `PieceRotation` avec l'interface `KeyListener`, comme pour l'extension précédente. J'ai implémenté les méthodes `keyPressed`, `keyReleased` et `keyTyped` de l'interface.
 
-Dans `keyPressed`, je récupère le code la touche appuyée, puis je test les quatre possibilités. Dans le cas d'une flèche droite ou gacuhe, je déplace la pièce avec la méthode `deplacerDe`. Pour la flèche du bas, j'appelle la méthode `gravite` du puits afin de faire descendre la pièce. Enfin, pour la flèche du haut, j'appelle la méthode `tourner` de la pièce actuelle.
+Dans `keyPressed`, je récupère le code la touche appuyée, puis je teste les quatre possibilités. Dans le cas d'une flèche droite ou gauche, je déplace la pièce avec la méthode `deplacerDe`. Pour la flèche du bas, j'appelle la méthode `gravite` du puits afin de faire descendre la pièce. Enfin, pour la flèche du haut, j'appelle la méthode `tourner` de la pièce actuelle.
 
 ![keyPressed](images/key-pressed-deplacement.png)
 
@@ -61,6 +70,8 @@ Les fonctions relatives aux déplacements de la pièce sont dans la classe `Piec
 ## 🌠 Descente rapide
 
 `Description` : Permettre au joueur de faire tomber sa pièce instantanément au fond du puits en cliquant sur sa molette de souris.
+
+`Action` : Appui sur `clic molette`. 
 
 `Réalisation` :
 
@@ -82,7 +93,7 @@ J'ai créee la méthode `dropdown` dans la classe `Puits`. Cette méthode permet
 
 `Réalisation` :
 
-J'ai tout d'abord créé une class `Score`. Cette classe possède un attribut `score` qui est incrémenté à chaque fois que le joueur fait disparaître une ligne. J'ai également créé une méthode `getScore` qui permet de récupérer le score actuel.
+J'ai tout d'abord créé une classe `Score`. Cette classe possède un attribut `score` qui est incrémenté à chaque fois que le joueur fait disparaître une ligne. J'ai également créé une méthode `getScore` qui permet de récupérer le score actuel.
 
 ![dropdown](images/class-score-min.png)
 
@@ -102,6 +113,6 @@ Pour afficher ce score, j'ai créé un classe `VueScore`.
 
 `Réalisation` :
 
-J'ai implémenté une gestion de la vitesse en fonction su score, dans la class `Score`. La classe reçoit maintenant en paramètre une instance de `Gravite`. Cet objet voit la durée de son timer diminuer en fonction du score.
+J'ai implémenté une gestion de la vitesse en fonction su score, dans la classe `Score`. La classe reçoit maintenant en paramètre une instance de `Gravite`. Cet objet voit la durée de son timer diminuer en fonction du score.
 
 ![dropdown](images/class-score.png)
