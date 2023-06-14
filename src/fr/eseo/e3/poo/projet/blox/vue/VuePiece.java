@@ -9,7 +9,7 @@ import java.awt.Color;
 
 public class VuePiece {
 
-    public static final double MULTIPLIER_TEINTE = 0.8;
+    public static final double MULTIPLIER_TEINTE = 0.3;
 
     private final int taille;
     private final Piece piece;
