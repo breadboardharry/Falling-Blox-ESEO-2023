@@ -4,7 +4,9 @@ import fr.eseo.e3.poo.projet.blox.modele.pieces.IPiece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.OPiece;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class PuitsTest {
 
@@ -20,6 +22,13 @@ public class PuitsTest {
     void testConstructeurLargeurProfondeur() {
         // Check default constructor
         Puits puits = new Puits(10, 15);
+        assertEquals(10, puits.getLargeur(), "Vérifier largeur");
+        assertEquals(15, puits.getProfondeur(), "Vérifier largeur");
+    }
+
+    @Test
+    void testConstructeurComplet() {
+        Puits puits = new Puits(10, 15, 50, 8);
         assertEquals(10, puits.getLargeur(), "Vérifier largeur");
         assertEquals(15, puits.getProfondeur(), "Vérifier largeur");
     }
@@ -75,10 +84,13 @@ public class PuitsTest {
         Puits puits = new Puits(10, 24);
         puits.setLargeur(12);
         assertEquals(12, puits.getLargeur(), "Vérifier setter largeur");
+    }
 
+    @Test
+    void testSetLargeurInvalide() {
         // Check constructor with invalid width (< 5)
         try {
-            Puits puits2 = new Puits(0, 20);
+            Puits puits = new Puits(0, 20);
             fail("Vérifier largeur invalide");
         } catch (IllegalArgumentException e) {
             assertEquals("Largeur invalide : 0 (5 - 15)", e.getMessage());
@@ -86,7 +98,7 @@ public class PuitsTest {
 
         // Check constructor with invalid width (> 15)
         try {
-            Puits puits3 = new Puits(20, 20);
+            Puits puits = new Puits(20, 20);
             fail("Vérifier largeur invalide");
         } catch (IllegalArgumentException e) {
             assertEquals("Largeur invalide : 20 (5 - 15)", e.getMessage());
@@ -104,10 +116,13 @@ public class PuitsTest {
         Puits puits = new Puits(12, 20);
         puits.setProfondeur(24);
         assertEquals(24, puits.getProfondeur(), "Vérifier setter profondeur");
+    }
 
+    @Test
+    void testSetProfondeurInvalide() {
         // Check constructor with invalid depth (< 15)
         try {
-            Puits puits4 = new Puits(10, 0);
+            Puits puits = new Puits(10, 0);
             fail("Vérifier profondeur invalide");
         } catch (IllegalArgumentException e) {
             assertEquals("Profondeur invalide : 0 (15 - 25)", e.getMessage());
@@ -115,7 +130,7 @@ public class PuitsTest {
 
         // Check constructor with invalid depth (> 25)
         try {
-            Puits puits5 = new Puits(10, 50);
+            Puits puits = new Puits(10, 50);
             fail("Vérifier profondeur invalide");
         } catch (IllegalArgumentException e) {
             assertEquals("Profondeur invalide : 50 (15 - 25)", e.getMessage());
@@ -141,9 +156,14 @@ public class PuitsTest {
     @Test
     void testPieceSuivante() {
         Puits puits = new Puits();
-        OPiece piece = new OPiece(new Coordonnees(0, 0), Couleur.BLEU);
-        puits.setPieceSuivante(piece);
-        assertEquals(piece, puits.getPieceSuivante(), "Vérifier getter et setter pièce suivante");
+
+        OPiece piece1 = new OPiece(new Coordonnees(0, 0), Couleur.BLEU);
+        puits.setPieceSuivante(piece1);
+        assertEquals(piece1, puits.getPieceSuivante(), "Vérifier setter pièce suivante");
+
+        IPiece piece2 = new IPiece(new Coordonnees(2, 2), Couleur.ROUGE);
+        puits.setPieceSuivante(piece2);
+        assertEquals(piece2, puits.getPieceSuivante(), "Vérifier setter pièce suivante");
     }
 
     @Test

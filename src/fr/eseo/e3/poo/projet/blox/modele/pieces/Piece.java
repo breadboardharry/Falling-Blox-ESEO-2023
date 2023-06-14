@@ -1,6 +1,10 @@
 package fr.eseo.e3.poo.projet.blox.modele.pieces;
 
-import fr.eseo.e3.poo.projet.blox.modele.*;
+import fr.eseo.e3.poo.projet.blox.modele.Element;
+import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
+import fr.eseo.e3.poo.projet.blox.modele.Couleur;
+import fr.eseo.e3.poo.projet.blox.modele.BloxException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +37,16 @@ public abstract class Piece {
         this.puits = puits;
     }
 
+    /**
+     * Get a copy of the elements array
+     */
     private List<Element> getElementsCopy() {
         List<Element> copy = new ArrayList<>();
         for (Element element : this.elements) {
-            copy.add(new Element(new Coordonnees(element.getCoordonnees().getAbscisse(), element.getCoordonnees().getOrdonnee()), element.getCouleur()));
+            copy.add(new Element(new Coordonnees(
+                    element.getCoordonnees().getAbscisse(),
+                    element.getCoordonnees().getOrdonnee()
+            ), element.getCouleur()));
         }
         return copy;
     }

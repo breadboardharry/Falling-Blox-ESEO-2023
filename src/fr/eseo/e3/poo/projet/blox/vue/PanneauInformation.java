@@ -16,6 +16,7 @@ public class PanneauInformation extends JPanel implements PropertyChangeListener
 
     public static final int TAILLE_PREVIEW_PIECE_SUIVANTE = 10;
     public static final int PREFERRED_SIZE = 70;
+    public static final int TOTAL_SIZE = TAILLE_PREVIEW_PIECE_SUIVANTE + PREFERRED_SIZE + 4;
 
     public PanneauInformation(Puits puits) {
         super();

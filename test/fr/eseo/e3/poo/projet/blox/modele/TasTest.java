@@ -34,7 +34,11 @@ public class TasTest {
             fail("Vérifier nombre d'éléLments, une exception aurait dû être levée");
         }
         catch (IllegalArgumentException e) {
-            assertEquals("Le nombre d'éléments doit être inférieur au nombre de cases du puits", e.getMessage(), "Constructeur tas nbElements et nbLignes");
+            assertEquals(
+                    "Le nombre d'éléments doit être inférieur au nombre de cases du puits",
+                    e.getMessage(),
+                    "Constructeur tas nbElements et nbLignes"
+            );
         }
     }
 

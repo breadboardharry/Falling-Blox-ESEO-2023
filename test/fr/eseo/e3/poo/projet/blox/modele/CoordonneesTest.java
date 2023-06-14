@@ -8,9 +8,9 @@ public class CoordonneesTest {
 
     @Test
     void testConstructeur() {
-        Coordonnees c1 = new Coordonnees(1, 2);
-        Coordonnees c2 = new Coordonnees(1, 2);
-        assertEquals(c1, c2, "Deux mêmes coordonnées");
+        Coordonnees c = new Coordonnees(1, 2);
+        assertEquals(1, c.getAbscisse(), "Constructeur invalide abscisse");
+        assertEquals(2, c.getOrdonnee(), "Constructeur invalide ordonnee");
     }
 
     @Test
@@ -58,7 +58,9 @@ public class CoordonneesTest {
         Coordonnees c1 = new Coordonnees(1, 2);
         Coordonnees c2 = new Coordonnees(1, 2);
         Coordonnees c3 = new Coordonnees(2, 1);
+        assertEquals(true, c1.equals(c1), "Deux coordonnées identiques");
         assertEquals(true, c1.equals(c2), "Deux coordonnées identiques");
         assertEquals(false, c1.equals(c3), "Deux coordonnées différentes");
+        assertEquals(false, c1.equals(null), "Deux coordonnées différentes");
     }
 }

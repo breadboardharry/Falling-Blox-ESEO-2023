@@ -12,21 +12,14 @@ import java.awt.BorderLayout;
 
 public class FallingBloxVersion1 {
     public static void main(String[] args) {
-        System.out.println("Falling Blox Version 1");
-        if (args.length == 0) {
-            FallingBloxVersion1.run(0, 0);
-        }
-        else if (args.length == 1) {
-            FallingBloxVersion1.run(Integer.parseInt(args[0]), 0);
-        }
-        else {
-            FallingBloxVersion1.run(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
-        }
+        if (args.length == 0) FallingBloxVersion1.run(0, 0);
+        else if (args.length == 1) FallingBloxVersion1.run(Integer.parseInt(args[0]), 0);
+        else FallingBloxVersion1.run(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
     }
 
     protected static void run(int nbElements, int nbLignes) {
         // Create puits
-        Puits puits = new Puits(5, 20);
+        Puits puits = new Puits(8, 20);
         VuePuits vuePuits = new VuePuits(puits, 20);
         Gravite gravite = new Gravite(vuePuits);
 
@@ -47,7 +40,10 @@ public class FallingBloxVersion1 {
 
         // Create frame
         JFrame frame = new JFrame("Falling Blox");
-        frame.setSize(puits.getLargeur() * vuePuits.getTaille() + PanneauInformation.PREFERRED_SIZE + PanneauInformation.TAILLE_PREVIEW_PIECE_SUIVANTE, puits.getProfondeur() * vuePuits.getTaille());
+        frame.setSize(
+                puits.getLargeur() * vuePuits.getTaille() + PanneauInformation.TOTAL_SIZE,
+                puits.getProfondeur() * vuePuits.getTaille() + 37
+        );
         frame.setResizable(false); // Disable resize
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close on exit
 

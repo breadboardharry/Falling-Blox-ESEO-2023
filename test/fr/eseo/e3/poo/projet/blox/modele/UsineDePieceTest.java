@@ -11,6 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class UsineDePieceTest {
 
@@ -22,6 +23,27 @@ public class UsineDePieceTest {
         assertEquals(UsineDePiece.ALEATOIRE_PIECE, UsineDePiece.getMode(), "Getter et setter mode ALEATOIRE_PIECE");
         UsineDePiece.setMode(UsineDePiece.CYCLIC);
         assertEquals(UsineDePiece.CYCLIC, UsineDePiece.getMode(), "Getter et setter mode CYCLIC");
+    }
+
+    @Test
+    void testResetCyclic() {
+        // Get the expected pieces and set their position
+        List<Piece> excpectedPieces = UsineDePiece.getPiecesArray();
+        excpectedPieces.get(0).setPosition(2, 3);
+        excpectedPieces.get(1).setPosition(2, 3);
+
+        UsineDePiece.setMode(UsineDePiece.CYCLIC);
+        UsineDePiece.genererPiece();
+        Piece piece2 = UsineDePiece.genererPiece();
+        assertEquals(excpectedPieces.get(1), piece2, "Vérifier génération pièce cylic");
+
+        // Change mode and get back to cyclic
+        UsineDePiece.setMode(UsineDePiece.ALEATOIRE_PIECE);
+        UsineDePiece.setMode(UsineDePiece.CYCLIC);
+
+        // Third piece should be the first one again
+        Piece piece3 = UsineDePiece.genererPiece();
+        assertEquals(excpectedPieces.get(0), piece3, "Vérifier réinitialisation du cyclic");
     }
 
     @Test
@@ -44,6 +66,18 @@ public class UsineDePieceTest {
             Piece piece = UsineDePiece.genererPiece();
             excpectedPieces.get(i).setPosition(2, 3);
             assertEquals(excpectedPieces.get(i), piece, "Vérifier génération pièce cylic");
+        }
+    }
+
+    @Test
+    void testGenererPieceInvalide() {
+        UsineDePiece.setMode(9999);
+
+        try {
+            UsineDePiece.genererPiece();
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals("Mode invalide : 9999", e.getMessage(), "Vérifier exception mode invalide");
         }
     }
 

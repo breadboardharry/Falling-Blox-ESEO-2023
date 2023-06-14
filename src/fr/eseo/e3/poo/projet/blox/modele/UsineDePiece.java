@@ -22,8 +22,7 @@ public class UsineDePiece {
     public static void setMode(int mode) {
         UsineDePiece.mode = mode;
         // Reset the index if the mode is cyclic
-        if (mode == CYCLIC)
-            UsineDePiece.cycleIndex = 0;
+        if (mode == CYCLIC) UsineDePiece.cycleIndex = 0;
     }
 
     public static int getMode() {
